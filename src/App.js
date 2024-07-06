@@ -6,6 +6,7 @@ function App() {
 			<header className="App-header">
 				<p>Hello!</p>
 				<p>Testing IDX</p>
+				<p>Test VS Code Web</p>
 				<a
 					className="App-link"
 					href="https://reactjs.org"

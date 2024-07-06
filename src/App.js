@@ -5,6 +5,7 @@ function App() {
 		<div className="App">
 			<header className="App-header">
 				<p>Hello!</p>
+				<p>Testing IDX</p>
 				<a
 					className="App-link"
 					href="https://reactjs.org"

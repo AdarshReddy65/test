@@ -9,9 +9,9 @@ function App() {
 			{console.log('inside the return')}
 			{showEmployees ? (
 				<>
-					<Employee />
-					<Employee />
-					<Employee />
+					<Employee name="Adarsh" role="CEO"/>
+					<Employee name="Aditya"/>
+					<Employee name="Ashish"/>
 				</>
 			) : (
 				<p>You cannot see the employees</p>

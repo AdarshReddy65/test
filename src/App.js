@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import './App.css';
+import './index.css';
 import Employee from './components/Employee';
 
 function App() {
 	const [ role, setRole ] = useState('No Role!');
 	const showEmployees = true;
 	return (
-		<div className="App">
+		<div className="App bg-red-300">
 			{showEmployees ? (
 				<>
 					<input type='text' onChange={(e)=>{

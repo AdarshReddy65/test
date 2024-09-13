@@ -7,37 +7,54 @@ function App() {
   const [role, setRole] = useState("No Role!");
   const [employees, setEmployees] = useState([
     {
+      id: 1,
       name: "Richard",
       role: "Team Lead",
       img: "https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg",
     },
     {
+      id: 2,
       name: "Hela",
       role: "UI Designer",
       img: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg",
     },
     {
+      id: 3,
       name: "Hary",
       role: "Developer",
       img: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg",
     },
     {
+      id: 4,
       name: "Michelle",
       role: "Tester",
       img: "https://images.pexels.com/photos/2169434/pexels-photo-2169434.jpeg",
     },
     {
+      id: 5,
       name: "Pfiser",
       role: "DB Admin",
       img: "https://images.pexels.com/photos/2128807/pexels-photo-2128807.jpeg",
     },
     {
+      id: 6,
       name: "Edith",
       role: "DevOps",
       img: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg",
     },
   ]);
+
+  const updateEmployee = (id, newName, newRole) => {
+    const updatedEmployees = employees.map((employee) => {
+      if (id === employee.id) {
+        return { ...employee, name: newName, role: newRole };
+      }
+      return employee;
+    });
+    setEmployees(updatedEmployees);
+  };
   const showEmployees = true;
+  
   return (
     <div className="App">
       {showEmployees ? (
@@ -51,10 +68,12 @@ function App() {
           <div className="flex flex-wrap">
             {employees.map((employee) => (
               <Employee
-								key={uuidv4()}
+								key={employee.id}
+                id={employee.id}
                 name={employee.name}
                 role={employee.role}
                 img={employee.img}
+                updateEmployee={updateEmployee}
               />
             ))}
           </div>

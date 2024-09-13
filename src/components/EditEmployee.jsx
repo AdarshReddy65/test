@@ -2,8 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function EditEmployee() {
+function EditEmployee(props) {
   const [show, setShow] = useState(false);
+  const [name, setName] = useState(props.name);
+  const [role, setRole] = useState(props.role);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -14,7 +16,7 @@ function EditEmployee() {
         onClick={handleShow}
         className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
       >
-        Update
+        Edit
       </button>
 
       <Modal
@@ -27,7 +29,12 @@ function EditEmployee() {
           <Modal.Title>Update Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <form id='edit-modal' className="bg-white rounded px-8 pt-6 pb-8">
+            <form onSubmit={(e)=>{
+              e.preventDefault();
+              props.updateEmployee(props.id, name, role);
+              handleClose();
+            }}
+            id='edit-modal' className="bg-white rounded px-8 pt-6 pb-8">
               <div className="mb-4">
                 <label
                   className="block text-gray-700 text-sm font-bold mb-2"
@@ -39,7 +46,8 @@ function EditEmployee() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   type="text"
-                  placeholder="John Doe"
+                  value={name}
+                  onChange={(e)=>setName(e.target.value)}
                 />
               </div>
               <div className="mb-4">
@@ -53,7 +61,8 @@ function EditEmployee() {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="role"
                   type="text"
-                  placeholder="Developer"
+                  value={role}
+                  onChange={(e)=>setRole(e.target.value)}
                 />
               </div>
             </form>

@@ -2,8 +2,11 @@ import { useState } from "react";
 import "./index.css";
 import Employee from "./components/Employee";
 import { v4 as uuidv4 } from "uuid";
+import AddEmployee from "./components/AddEmplyee";
+import EditEmployee from "./components/EditEmployee";
 
 function App() {
+  const showEmployees = true;
   const [role, setRole] = useState("No Role!");
   const [employees, setEmployees] = useState([
     {
@@ -53,8 +56,17 @@ function App() {
     });
     setEmployees(updatedEmployees);
   };
-  const showEmployees = true;
-  
+
+  const newEmployee = (name, role, img) => {
+    const newEmployee = {
+      id: uuidv4(),
+      name,
+      role,
+      img,
+    };
+    setEmployees([...employees, newEmployee]);
+  };
+
   return (
     <div className="App">
       {showEmployees ? (
@@ -66,17 +78,27 @@ function App() {
             }}
           />
           <div className="flex flex-wrap">
-            {employees.map((employee) => (
+            {employees.map((employee) => { 
+            const editEmployee = (
+              <EditEmployee
+                name={employee.name}
+                role={employee.role}
+                id={employee.id}
+                updateEmployee={updateEmployee}
+              />
+            );
+            return (
               <Employee
-								key={employee.id}
+                key={employee.id}
                 id={employee.id}
                 name={employee.name}
                 role={employee.role}
                 img={employee.img}
-                updateEmployee={updateEmployee}
+                editEmployee={editEmployee}
               />
-            ))}
+            )})}
           </div>
+          <AddEmployee newEmployee={newEmployee} />
         </>
       ) : (
         <p>You cannot see the employees</p>

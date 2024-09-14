@@ -1,10 +1,11 @@
 import { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
-function EditEmployee(props) {
+function AddEmployee(props) {
   const [show, setShow] = useState(false);
-  const [name, setName] = useState(props.name);
-  const [role, setRole] = useState(props.role);
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
+  const [img, setImg] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -13,9 +14,9 @@ function EditEmployee(props) {
     <>
       <button
         onClick={handleShow}
-        className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+        className="block mx-auto m-2 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
       >
-        Edit
+        + Add Employee
       </button>
 
       <Modal
@@ -25,13 +26,16 @@ function EditEmployee(props) {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Update Employee</Modal.Title>
+          <Modal.Title>Add Employee</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              props.updateEmployee(props.id, name, role);
+              setName('')
+              setRole('')
+              setImg('')
+              props.newEmployee( name, role, img);
             }}
             id="edit-modal"
             className="bg-white rounded px-8 pt-6 pb-8"
@@ -47,6 +51,7 @@ function EditEmployee(props) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="name"
                 type="text"
+                placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
@@ -62,8 +67,25 @@ function EditEmployee(props) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="role"
                 type="text"
+                placeholder="CTO"
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
+              />
+            </div>
+            <div className="mb-4">
+              <label
+                className="block text-gray-700 text-sm font-bold mb-2"
+                htmlFor="img"
+              >
+                Image URL
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="img"
+                type="text"
+                placeholder="www.google.com"
+                value={img}
+                onChange={(e) => setImg(e.target.value)}
               />
             </div>
           </form>
@@ -80,7 +102,7 @@ function EditEmployee(props) {
             onClick={handleClose}
             form="edit-modal"
           >
-            Update
+            Add
           </button>
         </Modal.Footer>
       </Modal>
@@ -88,4 +110,4 @@ function EditEmployee(props) {
   );
 }
 
-export default EditEmployee;
+export default AddEmployee;

@@ -32,10 +32,10 @@ function AddEmployee(props) {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setName('')
-              setRole('')
-              setImg('')
-              props.newEmployee( name, role, img);
+              setName("");
+              setRole("");
+              setImg("");
+              props.newEmployee(name, role, img);
             }}
             id="edit-modal"
             className="bg-white rounded px-8 pt-6 pb-8"

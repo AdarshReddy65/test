@@ -4,10 +4,10 @@ import Employee from "./components/Employee";
 import { v4 as uuidv4 } from "uuid";
 import AddEmployee from "./components/AddEmplyee";
 import EditEmployee from "./components/EditEmployee";
+import Header from "./components/Header";
 
 function App() {
   const showEmployees = true;
-  const [role, setRole] = useState("No Role!");
   const [employees, setEmployees] = useState([
     {
       id: 1,
@@ -68,35 +68,31 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App bg-gray-300 min-h-screen">
+      <Header />
       {showEmployees ? (
         <>
-          <input
-            type="text"
-            onChange={(e) => {
-              setRole(e.target.value);
-            }}
-          />
-          <div className="flex flex-wrap">
-            {employees.map((employee) => { 
-            const editEmployee = (
-              <EditEmployee
-                name={employee.name}
-                role={employee.role}
-                id={employee.id}
-                updateEmployee={updateEmployee}
-              />
-            );
-            return (
-              <Employee
-                key={employee.id}
-                id={employee.id}
-                name={employee.name}
-                role={employee.role}
-                img={employee.img}
-                editEmployee={editEmployee}
-              />
-            )})}
+          <div className="flex flex-wrap my-2">
+            {employees.map((employee) => {
+              const editEmployee = (
+                <EditEmployee
+                  name={employee.name}
+                  role={employee.role}
+                  id={employee.id}
+                  updateEmployee={updateEmployee}
+                />
+              );
+              return (
+                <Employee
+                  key={employee.id}
+                  id={employee.id}
+                  name={employee.name}
+                  role={employee.role}
+                  img={employee.img}
+                  editEmployee={editEmployee}
+                />
+              );
+            })}
           </div>
           <AddEmployee newEmployee={newEmployee} />
         </>

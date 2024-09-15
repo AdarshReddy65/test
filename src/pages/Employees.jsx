@@ -67,10 +67,10 @@ function Employees() {
   };
 
   return (
-    <div className="App bg-gray-300 min-h-screen">
+    <>
       {showEmployees ? (
         <>
-          <div className="flex flex-wrap py-2">
+          <div className="flex flex-wrap">
             {employees.map((employee) => {
               const editEmployee = (
                 <EditEmployee
@@ -97,7 +97,7 @@ function Employees() {
       ) : (
         <p>You cannot see the employees</p>
       )}
-    </div>
+    </>
   );
 }
 
